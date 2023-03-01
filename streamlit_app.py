@@ -43,10 +43,16 @@ def filtro_aleatorio(X_in, porc):
   return X[idx]
 with st.sidebar:
         porc_puntos = st.slider('% puntos', 0, 100, 5)
-        
+        piso_preg = st.checkbox('Sacar Piso')
+
+
 if option=='aviones.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('./aviones.xyz',skiprows=1, delimiter=";", unpack=True)
         X=np.column_stack((x, y, z, inte))
+
+        if piso_preg:
+            X= X[X[2]>5]
+        
         X_filtrada= filtro_aleatorio(X, porc_puntos)
         df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2]})
         fig = px.scatter(data_frame=df, x="x", y="y", title="Dataset")
