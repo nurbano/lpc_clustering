@@ -49,13 +49,15 @@ with st.sidebar:
 if option=='aviones.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('./aviones.xyz',skiprows=1, delimiter=";", unpack=True)
         X=np.column_stack((x, y, z, inte))
-
+        piso= 5
+        mascara_piso= z>piso
         if piso_preg:
-            X= X[X[2]>5]
+            X=np.column_stack((x[mascara_piso], y[mascara_piso], z[mascara_piso], inte[mascara_piso]))
+
         
         X_filtrada= filtro_aleatorio(X, porc_puntos)
         df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2]})
-        fig = px.scatter(data_frame=df, x="x", y="y", title="Dataset")
+        fig = px.scatter(data_frame=df, x="x", y="y", title="Dataset", color= "inte")
         st.plotly_chart(fig)
         
 if option_clustering== "DBSCAN":
