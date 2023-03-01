@@ -66,7 +66,7 @@ if option=='aviones.xyz':
 #         .mark_circle(color='#0068c9', opacity=0.5)
 #         .encode(x='x:Q', y='y:Q')) 
         
-        df = pd.Dataframe(data= {'x': X_filtrada[:, 0], "y": X_filtrada[:,1]})
+        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], "y": X_filtrada[:,1]})
         
         fig = px.scatter(
 #             df.query("year==2007"),
