@@ -56,12 +56,11 @@ if option=='aviones.xyz':
         
 if option_clustering== "DBSCAN":
     with st.sidebar:
-        eps_ = st.slider('Epsilon', 0.01, 0.10, 0.10)
+        eps_ = st.slider('Epsilon', 0.01, 0.50, 0.10)
     with st.spinner('Agrupando...'):
         cluster_db = DBSCAN( eps=eps_).fit(X_filtrada)
         st.write("Cantidad de Cluster: ")
         st.write(len(set(cluster_db.labels_)) - (1 if -1 in cluster_db.labels_ else 0))
-
     st.success('Listo!')
     df_out=pd.DataFrame(data={"cat": cluster_db.labels_})
 
@@ -73,7 +72,6 @@ if option_clustering== "K-means":
     with st.spinner('Agrupando...'):
         kmeans = KMeans(n_clusters=n_clus).fit(X_filtrada)
     st.success('Listo!')
-    
     df_out=pd.DataFrame(data={"cat": kmeans.labels_})
     
 if option_clustering== "MeanShit":
