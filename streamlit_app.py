@@ -37,11 +37,12 @@ def filtro_aleatorio(X_in, porc):
   idx = np.random.choice(np.arange(X_in.shape[0]), size=N)
 
   return X[idx]
-
+with st.sidebar:
+        porc_puntos = st.slider('% puntos', 0, 100, 5)
 if option=='aviones.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('./aviones.xyz',skiprows=1, delimiter=";", unpack=True)
         X=np.column_stack((x, y, z, inte))
-        X_filtrada= filtro_aleatorio(X, 10)
+        X_filtrada= filtro_aleatorio(X, porc_puntos)
 #         fig, ax = plt.subplots()
 #         ax.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01, c= X_filtrada[:,3])
 #         st.pyplot(fig)
@@ -52,7 +53,7 @@ if option=='aviones.xyz':
         
 if option_clustering== "DBSCAN":
     with st.sidebar:
-        eps_ = st.slider('Cantidad de Cluster', 0.01, 0.10, 0.10)
+        eps_ = st.slider('Epsilon', 0.01, 0.10, 0.10)
     with st.spinner('Agrupando...'):
         cluster_db = DBSCAN( eps=eps_).fit(X_filtrada)
         st.write("Cantidad de Cluster: ")
