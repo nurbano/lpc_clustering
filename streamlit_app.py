@@ -8,6 +8,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.cluster import DBSCAN
+from sklearn.cluster import MeanShift, estimate_bandwidth
 
 st.title('Segmentación de Nubes de Puntos LIDAR con técnicas de clustering')
 st.text('Nicolás Urbano Pintos')
@@ -18,7 +19,7 @@ df_dataset = pd.DataFrame({
     })
 
 df_clustering = pd.DataFrame({
-    'first column': ['K-means', 'DBSCAN', 'BIRD', 'OPTICS'],
+    'first column': ['K-means', 'DBSCAN', 'MeanShift','BIRD', 'OPTICS'],
 #     'second column': [10, 20, 30, 40]
     })
 
@@ -73,6 +74,23 @@ if option_clustering== "K-means":
     st.success('Listo!')
     
     df_out=pd.DataFrame(data={"cat": kmeans.labels_})
+    
+if option_clustering== "MeanShit":
+#     with st.sidebar:
+#         n_clus = st.slider('Cantidad de Cluster', 1, 20, 2)
+    with st.spinner('Agrupando...'):
+        bandwidth = estimate_bandwidth(X_filtrada, quantile=0.2, n_samples=500)
+        ms = MeanShift(bandwidth=bandwidth, bin_seeding=True)
+        ms.fit(X_filtrada)
+        labels = ms.labels_
+        cluster_centers = ms.cluster_centers_
+
+        labels_unique = np.unique(labels)
+        n_clusters_ = len(labels_unique)
+    st.success('Listo!')
+    st.write("Cantidad de Cluster: ")
+    st.write(n_clusters_)
+    df_out=pd.DataFrame(data={"cat": labels})
     
     
 df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
