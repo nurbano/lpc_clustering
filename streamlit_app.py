@@ -39,7 +39,7 @@ with st.echo(code_location='below'):
 
 df = pd.DataFrame({
     'first column': ['tabla.las', 'mesa.las', 'maceta.las', 'avion.xyz', 'autos.xyz'],
-    'second column': [10, 20, 30, 40]
+#     'second column': [10, 20, 30, 40]
     })
 
 option = st.selectbox(
