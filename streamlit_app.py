@@ -72,7 +72,7 @@ if option_clustering== "K-means":
         kmeans = KMeans(n_clusters=n_clus).fit(X_filtrada)
     st.success('Listo!')
     
-    df_out=pd.Dataframe(data={"cat": kmeans.labels_})
+    df_out=pd.DataFrame(data={"cat": kmeans.labels_})
     
     
 df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
