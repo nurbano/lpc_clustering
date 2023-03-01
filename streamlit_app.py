@@ -7,6 +7,7 @@ import numpy as np
 import plotly.express as px
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
+from sklearn.cluster import DBSCAN
 
 
 df_dataset = pd.DataFrame({
@@ -50,7 +51,8 @@ if option=='aviones.xyz':
         st.plotly_chart(fig)
         
 if option_clustering== "DBSCAN":
-    eps_ = st.slider('Cantidad de Cluster', 0.01, 0.10, 0.10)
+    with st.sidebar:
+        eps_ = st.slider('Cantidad de Cluster', 0.01, 0.10, 0.10)
     with st.spinner('Agrupando...'):
         cluster_db = DBSCAN( eps=eps_).fit(X_filtrada)
         st.write("Cantidad de Cluster: ")
@@ -61,7 +63,8 @@ if option_clustering== "DBSCAN":
     clase_pred=cluster_db.labels_
     
 if option_clustering== "K-means":
-    n_clus = st.slider('Cantidad de Cluster', 1, 20, 2)
+    with st.sidebar:
+        n_clus = st.slider('Cantidad de Cluster', 1, 20, 2)
     with st.spinner('Agrupando...'):
         kmeans = KMeans(n_clusters=n_clus).fit(X_filtrada)
     st.success('Listo!')
