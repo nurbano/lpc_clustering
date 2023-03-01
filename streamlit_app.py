@@ -49,7 +49,7 @@ if option=='aviones.xyz':
         fig = px.scatter(data_frame=df, x="x", y="y", title="Dataset")
         st.plotly_chart(fig)
         
- if clustering== "K-means":
+if clustering== "K-means":
     kmeans = KMeans(n_clusters=5).fit(X_filtrada)
     clase_pred=kmeans.labels_
     df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
