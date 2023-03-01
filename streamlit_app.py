@@ -66,12 +66,12 @@ if option=='aviones.xyz':
 #         .mark_circle(color='#0068c9', opacity=0.5)
 #         .encode(x='x:Q', y='y:Q')) 
         
-        df = px.data.gapminder()
-
+        df = pd.Dataframe('x': X_filtrada[:, 0], "y": X_filtrada[:,1])
+        
         fig = px.scatter(
-            df.query("year==2007"),
-            x="gdpPercap",
-            y="lifeExp",
+#             df.query("year==2007"),
+            x="x",
+            y="y",
             size="pop",
             color="continent",
             hover_name="country",
