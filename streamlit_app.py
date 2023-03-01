@@ -91,7 +91,7 @@ if option_clustering== "MeanShit":
     st.success('Listo!')
     st.write("Cantidad de Cluster: ")
     st.write(n_clusters_)
-    df_out=pd.DataFrame(data={"cat": labels})
+    df_out=pd.DataFrame(data={"cat": ms.labels_})
     
     
 df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
