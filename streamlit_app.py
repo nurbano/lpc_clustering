@@ -53,6 +53,6 @@ if option_clustering== "K-means":
     kmeans = KMeans(n_clusters=5).fit(X_filtrada)
     clase_pred=kmeans.labels_
     df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
-    fig = px.scatter(data_frame=df, x="x", y="y", color= "inten")
+    fig = px.scatter(data_frame=df, x="x", y="y", color= clase_pred)
     st.plotly_chart(fig)
 
