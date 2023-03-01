@@ -5,6 +5,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 import plotly.express as px
+import matplitlib.pyplot as plt
 
 """
 # Welcome to Streamlit!
@@ -60,31 +61,31 @@ if option=='aviones.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('./aviones.xyz',skiprows=1, delimiter=";", unpack=True)
         X=np.column_stack((x, y, z))
         X_filtrada= filtro_aleatorio(X, 5)
-#         plt.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01)
+        plt.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01)
 
 #         st.altair_chart(alt.Chart(pd.DataFrame([X_filtrada[:, 0], X_filtrada[:,1]]), height=500, width=500)
 #         .mark_circle(color='#0068c9', opacity=0.5)
 #         .encode(x='x:Q', y='y:Q')) 
         
-        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], "y": X_filtrada[:,1]})
+#         df = pd.DataFrame(data= {'x': X_filtrada[:, 0], "y": X_filtrada[:,1]})
         
-        fig = px.scatter(
-#             df.query("year==2007"),
-            x="x",
-            y="y",
-            size="pop",
-            color="continent",
-            hover_name="country",
-            log_x=True,
-            size_max=60,
-        )
+#         fig = px.scatter(
+# #             df.query("year==2007"),
+#             x="x",
+#             y="y",
+#             size="pop",
+#             color="continent",
+#             hover_name="country",
+#             log_x=True,
+#             size_max=60,
+#         )
 
-        tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
-        with tab1:
-            # Use the Streamlit theme.
-            # This is the default. So you can also omit the theme argument.
-            st.plotly_chart(fig, theme="streamlit", use_container_width=True)
-        with tab2:
-            # Use the native Plotly theme.
-            st.plotly_chart(fig, theme=None, use_container_width=True)
+#         tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
+#         with tab1:
+#             # Use the Streamlit theme.
+#             # This is the default. So you can also omit the theme argument.
+#             st.plotly_chart(fig, theme="streamlit", use_container_width=True)
+#         with tab2:
+#             # Use the native Plotly theme.
+#             st.plotly_chart(fig, theme=None, use_container_width=True)
         
