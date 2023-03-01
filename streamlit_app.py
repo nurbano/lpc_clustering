@@ -48,11 +48,20 @@ option = st.selectbox(
      df['first column'])
 
 'Seleccion: ', option
+def filtro_aleatorio(X_in, porc): 
+
+  N = int(296910*porc/100)
+  idx = np.random.choice(np.arange(X_in.shape[0]), size=N)
+
+  return X[idx]
 
 if option=='aviones.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('./aviones.xyz',skiprows=1, delimiter=";", unpack=True)
-        
-st.altair_chart(alt.Chart(pd.DataFrame([x,y]), height=500, width=500)
+        X=np.column_stack((x, y, z))
+        X_filtrada= filtro_aleatorio(X, 5)
+#         plt.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01)
+
+        st.altair_chart(alt.Chart(pd.DataFrame([X_filtrada[:, 0], X_filtrada[:,1]]), height=500, width=500)
         .mark_circle(color='#0068c9', opacity=0.5)
         .encode(x='x:Q', y='y:Q')) 
         
