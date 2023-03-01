@@ -56,7 +56,7 @@ if option=='aviones.xyz':
 
         
         X_filtrada= filtro_aleatorio(X, porc_puntos)
-        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2], 'y': X_filtrada[:,3]})
+        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2], 'inte': X_filtrada[:,3]})
         fig = px.scatter(data_frame=df, x="x", y="z", title="Dataset", color= "inte")
         st.plotly_chart(fig)
         
