@@ -59,10 +59,10 @@ def filtro_aleatorio(X_in, porc):
 
 if option=='aviones.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('./aviones.xyz',skiprows=1, delimiter=";", unpack=True)
-        X=np.column_stack((x, y, z))
+        X=np.column_stack((x, y, z, inte))
         X_filtrada= filtro_aleatorio(X, 5)
         fig, ax = plt.subplots()
-        ax.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01)
+        ax.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01, c= X_filtrada[:,3])
         st.pyplot(fig)
 #         st.altair_chart(alt.Chart(pd.DataFrame([X_filtrada[:, 0], X_filtrada[:,1]]), height=500, width=500)
 #         .mark_circle(color='#0068c9', opacity=0.5)
