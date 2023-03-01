@@ -62,6 +62,6 @@ if option_clustering== "K-means":
     clase_pred=kmeans.labels_
     df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1], 'z': X_filtrada[:,2],'inten': X_filtrada[:,3]})
     fig = px.scatter_3d(data_frame=df, x="x", y="y",z="z", color= clase_pred)
-    fig.update_traces(marker_size = 0.1)
+    fig.update_traces(marker_size = 1)
     st.plotly_chart(fig)
 
