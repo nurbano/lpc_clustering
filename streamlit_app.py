@@ -73,15 +73,12 @@ if option_clustering== "K-means":
     df_out=pd.DataFrame(data={"cat": kmeans.labels_})
     
 if option_clustering== "MeanShit":
-#     with st.sidebar:
-#         n_clus = st.slider('Cantidad de Cluster', 1, 20, 2)
     with st.spinner('Agrupando...'):
         bandwidth = estimate_bandwidth(X_filtrada, quantile=0.2, n_samples=500)
         ms = MeanShift(bandwidth=bandwidth, bin_seeding=True)
         ms.fit(X_filtrada)
         labels = ms.labels_
         cluster_centers = ms.cluster_centers_
-
         labels_unique = np.unique(labels)
         n_clusters_ = len(labels_unique)
     st.success('Listo!')
