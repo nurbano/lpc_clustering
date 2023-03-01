@@ -56,8 +56,8 @@ if option=='aviones.xyz':
 
         
         X_filtrada= filtro_aleatorio(X, porc_puntos)
-        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2]})
-        fig = px.scatter(data_frame=df, x="x", y="y", title="Dataset", color= "inte")
+        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2], 'y': X_filtrada[:,3]})
+        fig = px.scatter(data_frame=df, x="x", y="z", title="Dataset", color= "inte")
         st.plotly_chart(fig)
         
 if option_clustering== "DBSCAN":
