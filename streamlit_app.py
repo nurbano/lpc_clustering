@@ -50,7 +50,10 @@ if option=='aviones.xyz':
         st.plotly_chart(fig)
         
 if option_clustering== "K-means":
-    kmeans = KMeans(n_clusters=2).fit(X_filtrada)
+    with st.spinner('Wait for it...'):
+        kmeans = KMeans(n_clusters=2).fit(X_filtrada)
+    st.success('Done!')
+    
     clase_pred=kmeans.labels_
     df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
     fig = px.scatter(data_frame=df, x="x", y="y", color= clase_pred)
