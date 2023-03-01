@@ -55,7 +55,7 @@ if option=='aviones.xyz':
     df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
     fig = px.scatter(data_frame=df, x="x", y="y", color= "inten", title=clustering)
     st.plotly_chart(fig)
-    
+
     
 #         st.altair_chart(alt.Chart(pd.DataFrame([X_filtrada[:, 0], X_filtrada[:,1]]), height=500, width=500)
 #         .mark_circle(color='#0068c9', opacity=0.5)
