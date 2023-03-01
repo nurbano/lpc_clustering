@@ -50,8 +50,9 @@ if option=='aviones.xyz':
         st.plotly_chart(fig)
         
 if option_clustering== "K-means":
+    n_clus = st.slider('Cantidad de Cluster', 1, 20, 2)
     with st.spinner('Agrupando...'):
-        kmeans = KMeans(n_clusters=2).fit(X_filtrada)
+        kmeans = KMeans(n_clusters=n_clus).fit(X_filtrada)
     st.success('Listo!')
     
     clase_pred=kmeans.labels_
