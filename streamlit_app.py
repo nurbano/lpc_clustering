@@ -63,8 +63,9 @@ if option_clustering== "DBSCAN":
         st.write(len(set(cluster_db.labels_)) - (1 if -1 in cluster_db.labels_ else 0))
 
     st.success('Listo!')
+    df_out=pd.DataFrame(data={"cat": cluster_db.labels_})
+
     
-    clase_pred=cluster_db.labels_
     
 if option_clustering== "K-means":
     with st.sidebar:
