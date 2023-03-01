@@ -81,10 +81,11 @@ if option_clustering== "MeanShit":
         cluster_centers = ms.cluster_centers_
         labels_unique = np.unique(labels)
         n_clusters_ = len(labels_unique)
+        df_out=pd.DataFrame(data={"cat": ms.labels_})
     st.success('Listo!')
     st.write("Cantidad de Cluster: ")
     st.write(n_clusters_)
-    df_out=pd.DataFrame(data={"cat": ms.labels_})
+    
     
     
 df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
