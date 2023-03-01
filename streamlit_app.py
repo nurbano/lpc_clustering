@@ -38,7 +38,7 @@ with st.echo(code_location='below'):
         .encode(x='x:Q', y='y:Q'))
 
 df = pd.DataFrame({
-    'first column': ['tabla.las', 'mesa.las', 'maceta.las', 'avion.xyz', 'autos.xyz'],
+    'first column': ['tabla.las', 'mesa.las', 'maceta.las', 'aviones.xyz', 'autos.xyz'],
 #     'second column': [10, 20, 30, 40]
     })
 
@@ -48,8 +48,8 @@ option = st.selectbox(
 
 'Seleccion: ', option
 
-if option=='avion.xyz':
-        x,y,z,ilum,refle,inte,nb= np.loadtxt('avion.xyz',skiprows=1, delimiter=";", unpack=True)
+if option=='aviones.xyz':
+        x,y,z,ilum,refle,inte,nb= np.loadtxt('aviones.xyz',skiprows=1, delimiter=";", unpack=True)
         
 st.altair_chart(alt.Chart(pd.DataFrame([x,y]), height=500, width=500)
         .mark_circle(color='#0068c9', opacity=0.5)
