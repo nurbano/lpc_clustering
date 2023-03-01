@@ -10,7 +10,7 @@ from sklearn.cluster import KMeans
 
 
 df_dataset = pd.DataFrame({
-    'first column': ['tabla.las', 'mesa.las', 'maceta.las', 'aviones.xyz', 'autos.xyz'],
+    'first column': ['aviones.xyz','tabla.las', 'mesa.las', 'maceta.las',  'autos.xyz'],
 #     'second column': [10, 20, 30, 40]
     })
 
