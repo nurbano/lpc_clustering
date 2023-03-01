@@ -62,7 +62,7 @@ if option=='aviones.xyz':
         X=np.column_stack((x, y, z))
         X_filtrada= filtro_aleatorio(X, 5)
         plt.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01)
-
+        plt.show()
 #         st.altair_chart(alt.Chart(pd.DataFrame([X_filtrada[:, 0], X_filtrada[:,1]]), height=500, width=500)
 #         .mark_circle(color='#0068c9', opacity=0.5)
 #         .encode(x='x:Q', y='y:Q')) 
