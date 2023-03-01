@@ -48,8 +48,7 @@ option = st.selectbox(
 
 'Seleccion: ', option
 
-match option:
-    case: 'avion.xyz'
+if option=='avion.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('avion.xyz',skiprows=1, delimiter=";", unpack=True)
         
 st.altair_chart(alt.Chart(pd.DataFrame(x,y), height=500, width=500)
