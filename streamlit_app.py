@@ -72,11 +72,11 @@ if option_clustering== "K-means":
         kmeans = KMeans(n_clusters=n_clus).fit(X_filtrada)
     st.success('Listo!')
     
-    clase_pred=kmeans.labels_
+    df_out=pd.Dataframe(data={"cat": kmeans.labels_})
     
     
 df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
-fig = px.scatter(data_frame=df, x="x", y="y", color= clase_pred,  color_discrete_map=px.colors.qualitative.G10,title= option_clustering)
+fig = px.scatter(data_frame=df, x="x", y="y", df_out["cat"].astype("category"),  color_discrete_map=px.colors.qualitative.G10,title= option_clustering)
 st.plotly_chart(fig)
     
     
