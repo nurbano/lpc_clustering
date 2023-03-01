@@ -8,19 +8,27 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 
 
-df = pd.DataFrame({
+df_dataset = pd.DataFrame({
     'first column': ['tabla.las', 'mesa.las', 'maceta.las', 'aviones.xyz', 'autos.xyz'],
 #     'second column': [10, 20, 30, 40]
     })
 
-
+df_clustering = pd.DataFrame({
+    'first column': ['K-means', 'DBSCAN', 'BIRD', 'OPTICS'],
+#     'second column': [10, 20, 30, 40]
+    })
 
 with st.sidebar:
     option = st.selectbox(
-        'Eliga el dataset que desea visualizar',
-         df['first column'])
+        'Dataset',
+         df_dataset['first column'])
+   
+    option_clustering = st.selectbox(
+        'Dataset',
+         df_clustering['first column'])
+   
 
-'Seleccion: ', option
+'Dataset: ', option
 def filtro_aleatorio(X_in, porc): 
 
   N = int(296910*porc/100)
