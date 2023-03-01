@@ -64,7 +64,7 @@ if option=='aviones.xyz':
 #         fig, ax = plt.subplots()
 #         ax.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01, c= X_filtrada[:,3])
 #         st.pyplot(fig)
-        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1]})
+        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2]})
 
         fig = px.scatter(data_frame=df, x="x", y="y", title="Sample Data")
         st.plotly_chart(fig)
