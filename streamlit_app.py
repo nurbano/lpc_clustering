@@ -53,33 +53,6 @@ if option_clustering== "K-means":
     kmeans = KMeans(n_clusters=5).fit(X_filtrada)
     clase_pred=kmeans.labels_
     df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
-    fig = px.scatter(data_frame=df, x="x", y="y", color= "inten", title=option_clustering)
+    fig = px.scatter(data_frame=df, x="x", y="y", color= "inten")
     st.plotly_chart(fig)
 
-    
-#         st.altair_chart(alt.Chart(pd.DataFrame([X_filtrada[:, 0], X_filtrada[:,1]]), height=500, width=500)
-#         .mark_circle(color='#0068c9', opacity=0.5)
-#         .encode(x='x:Q', y='y:Q')) 
-        
-#         df = pd.DataFrame(data= {'x': X_filtrada[:, 0], "y": X_filtrada[:,1]})
-        
-#         fig = px.scatter(
-# #             df.query("year==2007"),
-#             x="x",
-#             y="y",
-#             size="pop",
-#             color="continent",
-#             hover_name="country",
-#             log_x=True,
-#             size_max=60,
-#         )
-
-#         tab1, tab2 = st.tabs(["Streamlit theme (default)", "Plotly native theme"])
-#         with tab1:
-#             # Use the Streamlit theme.
-#             # This is the default. So you can also omit the theme argument.
-#             st.plotly_chart(fig, theme="streamlit", use_container_width=True)
-#         with tab2:
-#             # Use the native Plotly theme.
-#             st.plotly_chart(fig, theme=None, use_container_width=True)
-        
