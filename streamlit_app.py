@@ -59,7 +59,7 @@ if option=='aviones.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('./aviones.xyz',skiprows=1, delimiter=";", unpack=True)
         X=np.column_stack((x, y, z))
         X_filtrada= filtro_aleatorio(X, 5)
-#         plt.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01)
+        plt.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01)
 
         st.altair_chart(alt.Chart(pd.DataFrame([X_filtrada[:, 0], X_filtrada[:,1]]), height=500, width=500)
         .mark_circle(color='#0068c9', opacity=0.5)
