@@ -38,12 +38,12 @@ with st.echo(code_location='below'):
         .encode(x='x:Q', y='y:Q'))
 
 df = pd.DataFrame({
-    'first column': [1, 2, 3, 4],
+    'first column': ['tabla.las', 'mesa.las', 'maceta.las', 'avion.xyz', 'autos.xyz'],
     'second column': [10, 20, 30, 40]
     })
 
 option = st.selectbox(
-    'Which number do you like best?',
+    'Eliga el dataset que desea visualizar',
      df['first column'])
 
-'You selected: ', option
+'Seleccion: ', option
