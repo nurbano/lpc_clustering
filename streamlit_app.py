@@ -9,7 +9,9 @@ import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.cluster import DBSCAN
 
-
+st.title('Segmentación de Nubes de Puntos LIDAR con técnicas de clustering')
+st.text('Nicolás Urbano Pintos')
+st.text('urbano.nicolas@gmail.com')
 df_dataset = pd.DataFrame({
     'first column': ['aviones.xyz','tabla.las', 'mesa.las', 'maceta.las',  'autos.xyz'],
 #     'second column': [10, 20, 30, 40]
