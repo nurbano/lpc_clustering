@@ -64,9 +64,9 @@ if option=='aviones.xyz':
 #         fig, ax = plt.subplots()
 #         ax.scatter(X_filtrada[:, 0], X_filtrada[:,1], s= 0.01, c= X_filtrada[:,3])
 #         st.pyplot(fig)
-        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], "y": X_filtrada[:,1]})
+        df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1]})
 
-        fig = px.scatter(data_frame=df, x="x", y="y)", title="Sample Data")
+        fig = px.scatter(data_frame=df, x="x", y="y", title="Sample Data")
         st.plotly_chart(fig)
 #         st.altair_chart(alt.Chart(pd.DataFrame([X_filtrada[:, 0], X_filtrada[:,1]]), height=500, width=500)
 #         .mark_circle(color='#0068c9', opacity=0.5)
