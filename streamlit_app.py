@@ -49,6 +49,17 @@ if option=='aviones.xyz':
         fig = px.scatter(data_frame=df, x="x", y="y", title="Dataset")
         st.plotly_chart(fig)
         
+if option_clustering== "DBSCAN":
+    eps_ = st.slider('Cantidad de Cluster', 0.01, 0.10, 0.10)
+    with st.spinner('Agrupando...'):
+        cluster_db = DBSCAN( eps=eps_).fit(X_filtrada)
+        st.write("Cantidad de Cluster: ")
+        st.write(len(set(cluster_db.labels_)) - (1 if -1 in cluster_db.labels_ else 0))
+
+    st.success('Listo!')
+    
+    clase_pred=cluster_db.labels_
+    
 if option_clustering== "K-means":
     n_clus = st.slider('Cantidad de Cluster', 1, 20, 2)
     with st.spinner('Agrupando...'):
@@ -56,14 +67,16 @@ if option_clustering== "K-means":
     st.success('Listo!')
     
     clase_pred=kmeans.labels_
-    df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
-    fig = px.scatter(data_frame=df, x="x", y="y", color= clase_pred,  color_discrete_map=px.colors.qualitative.G10,)
-    st.plotly_chart(fig)
     
-    clase_pred=kmeans.labels_
-    df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1], 'z': X_filtrada[:,2],'inten': X_filtrada[:,3]})
-    fig = px.scatter_3d(data_frame=df, x="x", y="y",z="z", color= clase_pred,  color_discrete_map=px.colors.qualitative.G10,)
-    fig.update_traces(marker_size = 1)
-    fig.update_layout(legend_itemsizing ='trace')
-    st.plotly_chart(fig)
+    
+df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
+fig = px.scatter(data_frame=df, x="x", y="y", color= clase_pred,  color_discrete_map=px.colors.qualitative.G10,)
+st.plotly_chart(fig)
+    
+    
+df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1], 'z': X_filtrada[:,2],'inten': X_filtrada[:,3]})
+fig = px.scatter_3d(data_frame=df, x="x", y="y",z="z", color= clase_pred,  color_discrete_map=px.colors.qualitative.G10,)
+fig.update_traces(marker_size = 1)
+fig.update_layout(legend_itemsizing ='trace')
+st.plotly_chart(fig)
 
