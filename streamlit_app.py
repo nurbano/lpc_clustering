@@ -81,7 +81,7 @@ st.plotly_chart(fig)
     
     
 df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1], 'z': X_filtrada[:,2],'inten': X_filtrada[:,3]})
-fig = px.scatter_3d(data_frame=df, x="x", y="y",z="z", color= clase_pred,  color_discrete_map=px.colors.qualitative.G10, title= option_clustering)
+fig = px.scatter_3d(data_frame=df, x="x", y="y",z="z", color= df_out["cat"].astype("category"),  color_discrete_map=px.colors.qualitative.G10, title= option_clustering)
 fig.update_traces(marker_size = 1)
 fig.update_layout(legend_itemsizing ='trace')
 st.plotly_chart(fig)
