@@ -58,6 +58,7 @@ if option=='aviones.xyz':
         X_filtrada= filtro_aleatorio(X, porc_puntos)
         df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2], 'inte': X_filtrada[:,3]})
         fig = px.scatter(data_frame=df, x="x", y="z", title="Dataset", color= "inte")
+        fig.update_traces(marker_size = 1)
         st.plotly_chart(fig)
         X=np.column_stack((x, y, z))
         if piso_preg:
@@ -99,12 +100,13 @@ if option_clustering== "MeanShit":
     
     
     
-df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2], 'inten': X_filtrada[:,3]})
+df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,2]})
 fig = px.scatter(data_frame=df, x="x", y="y", color= df_out["cat"].astype("category"), title= option_clustering, color_discrete_sequence=px.colors.qualitative.G10)
+fig.update_traces(marker_size = 1)
 st.plotly_chart(fig)
     
     
-df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1], 'z': X_filtrada[:,2],'inten': X_filtrada[:,3]})
+df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1], 'z': X_filtrada[:,2]})
 fig = px.scatter_3d(data_frame=df, x="x", y="y",z="z", color= df_out["cat"].astype("category"),   title= option_clustering, color_discrete_sequence=px.colors.qualitative.G10)
 fig.update_traces(marker_size = 1)
 fig.update_layout(legend_itemsizing ='trace')
