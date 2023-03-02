@@ -67,7 +67,7 @@ if option=='aviones.xyz':
         
 if option_clustering== "DBSCAN":
     with st.sidebar:
-        eps_ = st.slider('Epsilon', 0.01, 0.50, 0.10)
+        eps_ = st.slider('Epsilon', 0.01, 0.9, 0.50)
     with st.spinner('Agrupando...'):
         cluster_db = DBSCAN( eps=eps_).fit(X_filtrada)
     st.success('Listo!')
