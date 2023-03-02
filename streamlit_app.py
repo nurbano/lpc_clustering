@@ -59,6 +59,9 @@ if option=='aviones.xyz':
         df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2], 'inte': X_filtrada[:,3]})
         fig = px.scatter(data_frame=df, x="x", y="z", title="Dataset", color= "inte")
         st.plotly_chart(fig)
+        X=np.column_stack((x, y, z))
+        if piso_preg:
+            X=np.column_stack((x[mascara_piso], y[mascara_piso], z[mascara_piso]))
         
 if option_clustering== "DBSCAN":
     with st.sidebar:
