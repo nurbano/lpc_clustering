@@ -49,7 +49,7 @@ with st.sidebar:
 if option=='aviones.xyz':
         x,y,z,ilum,refle,inte,nb= np.loadtxt('./aviones.xyz',skiprows=1, delimiter=";", unpack=True)
         X=np.column_stack((x, y, z, inte))
-        piso= 5
+        piso= 5.1
         mascara_piso= z>piso
         if piso_preg:
             X=np.column_stack((x[mascara_piso], y[mascara_piso], z[mascara_piso], inte[mascara_piso]))
