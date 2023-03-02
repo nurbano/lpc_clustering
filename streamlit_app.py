@@ -58,11 +58,12 @@ if option=='aviones.xyz':
         X_filtrada= filtro_aleatorio(X, porc_puntos)
         df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2], 'inte': X_filtrada[:,3]})
         fig = px.scatter(data_frame=df, x="x", y="z", title="Dataset", color= "inte")
-        fig.update_traces(marker_size = 1)
+        fig.update_traces(marker_size = 2)
         st.plotly_chart(fig)
         X=np.column_stack((x, y, z))
         if piso_preg:
             X=np.column_stack((x[mascara_piso], y[mascara_piso], z[mascara_piso]))
+        X_filtrada= filtro_aleatorio(X, porc_puntos)
         
 if option_clustering== "DBSCAN":
     with st.sidebar:
