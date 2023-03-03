@@ -5,41 +5,13 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 import plotly.express as px
-#import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans
 from sklearn.cluster import DBSCAN
 from sklearn.cluster import MeanShift, estimate_bandwidth
 from sklearn.cluster import Birch
 import laspy
 
-st.title('Segmentación de Nubes de Puntos LIDAR con técnicas de clustering')
-st.text('Nicolás Urbano Pintos')
-st.text('urbano.nicolas@gmail.com')
-df_dataset = pd.DataFrame({
-    'first column': ['aviones.xyz','escalera.las', 'mesa.las', 'maceta.las',  'autos.xyz'],
-#     'second column': [10, 20, 30, 40]
-    })
-
-df_clustering = pd.DataFrame({
-    'first column': ['K-means', 'DBSCAN', 'MeanShift','BIRD'],
-#     'second column': [10, 20, 30, 40]
-    })
-
-with st.sidebar:
-        option = st.selectbox(
-        'Dataset',
-         df_dataset['first column'])
-
-        porc_puntos = st.slider('% puntos', 0, 100, 5)
-        tam_punto= st.slider("Tamaño de puntos",0,10,2)   
-        piso_preg = st.checkbox('Sacar Piso')
-
-        option_clustering = st.selectbox(
-        'Metodo',
-         df_clustering['first column'])
-   
-
-'Dataset: ', option
+#Funciones
 
 def filtro_aleatorio(X_in, porc): 
 
@@ -75,14 +47,51 @@ def leer_las(file):
     scaled_y = scaled_y_dimension(las)
     scaled_z = scaled_z_dimension(las)
     return np.array(scaled_x), np.array(scaled_y), np.array(scaled_z), np.array(las.intensity)
-        
+
+#Pantalla Princial
+st.title('Segmentación de Nubes de Puntos LIDAR con técnicas de clustering')
+st.text('Nicolás Urbano Pintos')
+st.text('urbano.nicolas@gmail.com')
+
+df_dataset = pd.DataFrame({
+    'first column': ['aviones.xyz',
+                     'escalera.las', 
+                     'mesa.las', 'maceta.las',  
+                     'autos.xyz'],
+
+    })
+
+df_clustering = pd.DataFrame({
+    'first column': ['K-means', 
+                     'DBSCAN', 
+                     'MeanShift',
+                     'BIRD'],
+
+    })
+
+with st.sidebar:
+        option = st.selectbox(
+        'Dataset',
+         df_dataset['first column'])
+
+        porc_puntos = st.slider('% puntos', 0, 100, 5)
+        tam_punto= st.slider("Tamaño de puntos",0,10,2)   
+        piso_preg = st.checkbox('Sacar Piso')
+
+        option_clustering = st.selectbox('Metodo',
+         df_clustering['first column'])
+   
+
+'Dataset: ', option
 
 
+      
+#Apertura de Dataset
 
 if ".las" in option:
     x,y,z,inte= leer_las(option)
     X= np.column_stack((x, y, z, inte))
-    X_filtrada= filtro_aleatorio(X, porc_puntos)
+    X_filtrada= filtro_aleatorio(X, porc_puntos)#Filtro la cantidad de puntos
     df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2], 'inte': X_filtrada[:,3]})
     fig = px.scatter(data_frame=df, x="x", y="z", title="Dataset", color= "inte")
     fig.update_traces(marker_size = tam_punto)
@@ -112,7 +121,7 @@ if ".xyz" in option:
         
         X_filtrada= filtro_aleatorio(X, porc_puntos)
         df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2], 'inte': X_filtrada[:,3]})
-        fig = px.scatter(data_frame=df, x="x", y="z", title="Dataset", color= "inte")
+        fig = px.scatter(data_frame=df, x="x", y="z", title="Dataset- Vista XZ", color= "inte", color_continuous_scale='Bluered_r')
         fig.update_traces(marker_size = tam_punto)
         st.plotly_chart(fig)
         X=np.column_stack((x, y, z))
@@ -126,8 +135,6 @@ if option_clustering== "DBSCAN":
     with st.spinner('Agrupando...'):
         cluster_db = DBSCAN( eps=eps_).fit(X_filtrada)
     st.success('Listo!')
-    # st.write("Cantidad de Cluster: ")
-    # st.write(len(set(cluster_db.labels_)) - (1 if -1 in cluster_db.labels_ else 0))
     df_out=pd.DataFrame(data={"cat": cluster_db.labels_})
     cantidad_cluster= len(np.unique(cluster_db.labels_))
 
@@ -175,13 +182,17 @@ if option_clustering== 'BIRD':
 st.metric(label="Clusters", value=cantidad_cluster)   
     
 df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'z': X_filtrada[:,2]})
-fig = px.scatter(data_frame=df, x="x", y="z", color= df_out["cat"].astype("category"), title= option_clustering , color_discrete_sequence=px.colors.qualitative.G10)
+fig = px.scatter(data_frame=df, x="x", y="z", color= df_out["cat"].astype("category"), 
+                 title= option_clustering + " - Vista XZ" ,
+                 color_discrete_sequence=px.colors.qualitative.G10)
 fig.update_traces(marker_size = tam_punto)
 st.plotly_chart(fig)
     
     
 df = pd.DataFrame(data= {'x': X_filtrada[:, 0], 'y': X_filtrada[:,1], 'z': X_filtrada[:,2]})
-fig = px.scatter_3d(data_frame=df, x="x", y="y",z="z", color= df_out["cat"].astype("category"),   title= option_clustering , color_discrete_sequence=px.colors.qualitative.G10)
+fig = px.scatter_3d(data_frame=df, x="x", y="y",z="z", color= df_out["cat"].astype("category"),
+                    title= option_clustering + " - Vista 3D" , 
+                    color_discrete_sequence=px.colors.qualitative.G10)
 fig.update_traces(marker_size = tam_punto)
 fig.update_layout(legend_itemsizing ='trace')
 st.plotly_chart(fig)
