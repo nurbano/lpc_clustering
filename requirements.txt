@@ -4,3 +4,4 @@ streamlit
 plotly
 matplotlib
 scikit-learn
+laspy
